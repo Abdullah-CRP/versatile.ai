@@ -9,45 +9,49 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        base: {
-          DEFAULT: "#F5F5F0",
-          warm: "#EDE8E1",
-          card: "#FCFCFA",
+        obsidian: {
+          950: "#000000",
+          900: "#050505",
+          850: "#0A0A0A",
+          800: "#121214",
+          700: "#18181B",
+          600: "#27272A",
         },
-        espresso: {
-          50: "#EFEBE9",
-          100: "#D7CCC8",
-          200: "#BCAAA4",
-          300: "#A1887F",
-          400: "#8D6E63",
-          500: "#795548",
-          600: "#6D4C41",
-          700: "#5D4037",
-          800: "#4E342E",
-          900: "#3E2723",
-          950: "#271714",
-          DEFAULT: "#3E2723",
+        cyan: {
+          glow: "#06b6d4",
+          bright: "#22d3ee",
+          neon: "#67e8f9",
+          soft: "rgba(6, 182, 212, 0.15)",
         },
-        stone: {
-          100: "#F5F5F0",
-          200: "#E8E6DF",
-          300: "#D6D2C9",
-          400: "#B5AFA2",
-          500: "#8D6E63",
-        }
+        silver: {
+          100: "#F4F4F5",
+          200: "#E4E4E7",
+          300: "#D4D4D8",
+          400: "#A1A1AA",
+          500: "#71717A",
+          600: "#52525B",
+        },
       },
       fontFamily: {
         sans: ["var(--font-inter)", "Inter", "system-ui", "sans-serif"],
-        mono: ["var(--font-jetbrains-mono)", "JetBrains Mono", "monospace"],
+        mono: ["var(--font-geist-mono)", "JetBrains Mono", "monospace"],
       },
       boxShadow: {
-        subtle: "0 4px 20px -2px rgba(62, 39, 35, 0.05)",
-        card: "0 10px 30px -4px rgba(62, 39, 35, 0.08)",
-        magnetic: "0 12px 35px -5px rgba(62, 39, 35, 0.18)",
+        "glass-sm": "0 4px 24px -1px rgba(0, 0, 0, 0.4)",
+        "glass-md": "0 8px 32px 0 rgba(0, 0, 0, 0.5)",
+        "glow-cyan": "0 0 25px rgba(6, 182, 212, 0.45)",
+        "glow-cyan-lg": "0 0 50px rgba(6, 182, 212, 0.65)",
+        "glow-cyan-sm": "0 0 12px rgba(6, 182, 212, 0.35)",
+        "glow-amber": "0 0 25px rgba(251, 191, 36, 0.45)",
       },
       backdropBlur: {
-        glass: "12px",
-      }
+        glass: "16px",
+        "glass-xl": "24px",
+      },
+      animation: {
+        "pulse-slow": "pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite",
+        "spin-slow": "spin 8s linear infinite",
+      },
     },
   },
   plugins: [],

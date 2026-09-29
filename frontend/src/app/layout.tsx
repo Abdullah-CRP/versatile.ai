@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
-import { Inter, Geist } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
 export const metadata: Metadata = {
-  title: "HackDataV2 | Synthetic Data Platform",
-  description: "Enterprise synthetic data platform with RAG routing and referential integrity.",
+  title: "Versatile — Synthetic Data Platform",
+  description: "Versatile: Enterprise high-performance synthetic data generation platform powered by Gemini AI, relational integrity, and differential privacy.",
 };
 
 export default function RootLayout({
@@ -15,8 +15,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${inter.variable} font-sans antialiased bg-base text-espresso`}>
+    <html lang="en" className="dark">
+      <body className={`${inter.variable} font-sans antialiased bg-black text-white selection:bg-cyan-500/30 selection:text-white`}>
         {children}
       </body>
     </html>

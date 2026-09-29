@@ -11,23 +11,23 @@ interface FloatingExportBarProps {
 
 export const FloatingExportBar: React.FC<FloatingExportBarProps> = ({ onExport, recordCount }) => {
   return (
-    <div className="absolute bottom-2 left-1/2 -translate-x-1/2 z-20">
-      <div className="flex items-center gap-3 px-5 py-2.5 rounded-full bg-base-card/95 border border-stone-300/80 shadow-magnetic backdrop-blur-md">
-        <div className="flex items-center gap-2 pr-3 border-r border-stone-300">
-          <Download className="w-4 h-4 text-espresso-800" />
-          <span className="text-xs font-serif font-bold text-espresso-950">Export Dataset</span>
-          <span className="text-[10px] px-1.5 py-0.5 rounded bg-stone-200 text-espresso-700 font-mono">
+    <div className="absolute bottom-5 right-5 z-30">
+      <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-black/80 border border-white/10 shadow-glow-cyan-sm backdrop-blur-2xl">
+        <div className="flex items-center gap-2 pr-3 border-r border-white/10">
+          <Download className="w-3.5 h-3.5 text-cyan-400" />
+          <span className="text-xs font-mono font-semibold text-white">Export</span>
+          <span className="text-[10px] px-2 py-0.5 rounded-full bg-cyan-500/10 text-cyan-300 border border-cyan-500/20 font-mono">
             {recordCount} rows
           </span>
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1.5">
           <Magnetic strength={0.2}>
             <button
               onClick={() => onExport("csv")}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold text-espresso-900 bg-stone-200/80 hover:bg-stone-300 transition-colors"
+              className="flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono text-silver-300 hover:text-white hover:bg-cyan-500/20 transition-colors"
             >
-              <FileSpreadsheet className="w-3.5 h-3.5" />
+              <FileSpreadsheet className="w-3.5 h-3.5 text-cyan-400" />
               <span>CSV</span>
             </button>
           </Magnetic>
@@ -35,9 +35,9 @@ export const FloatingExportBar: React.FC<FloatingExportBarProps> = ({ onExport, 
           <Magnetic strength={0.2}>
             <button
               onClick={() => onExport("json")}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold text-espresso-900 bg-stone-200/80 hover:bg-stone-300 transition-colors"
+              className="flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono text-silver-300 hover:text-white hover:bg-cyan-500/20 transition-colors"
             >
-              <FileCode className="w-3.5 h-3.5" />
+              <FileCode className="w-3.5 h-3.5 text-cyan-400" />
               <span>JSON</span>
             </button>
           </Magnetic>
@@ -45,10 +45,10 @@ export const FloatingExportBar: React.FC<FloatingExportBarProps> = ({ onExport, 
           <Magnetic strength={0.2}>
             <button
               onClick={() => onExport("sql")}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold text-espresso-900 bg-stone-200/80 hover:bg-stone-300 transition-colors"
+              className="flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono text-silver-300 hover:text-white hover:bg-cyan-500/20 transition-colors"
             >
-              <Database className="w-3.5 h-3.5" />
-              <span>SQL Dump</span>
+              <Database className="w-3.5 h-3.5 text-cyan-400" />
+              <span>SQL</span>
             </button>
           </Magnetic>
         </div>

@@ -1,7 +1,8 @@
 "use client";
 
 import React from "react";
-import { Sliders, ShieldCheck, Globe, Play, Loader2 } from "lucide-react";
+import { motion } from "framer-motion";
+import { Sliders, ShieldCheck, Globe, Play, Loader2, Sparkles, Cpu, Lock } from "lucide-react";
 import { Magnetic } from "./Magnetic";
 import { GenerationConfig } from "../lib/api";
 
@@ -44,43 +45,53 @@ export const RightSidebar: React.FC<RightSidebarProps> = ({
   };
 
   return (
-    <aside className="w-80 flex-shrink-0 flex flex-col gap-4">
+    <motion.aside
+      initial={{ opacity: 0, x: 24 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+      className="w-80 flex-shrink-0 flex flex-col gap-4 h-full"
+    >
       {/* Top Header */}
       <div className="flex items-center justify-between px-2 pt-1">
         <div className="flex items-center gap-2">
-          <Sliders className="w-4 h-4 text-espresso-800" />
-          <h2 className="font-serif text-base font-bold text-espresso-950">Configuration</h2>
+          <Sliders className="w-4 h-4 text-cyan-400" strokeWidth={1.5} />
+          <h2 className="text-sm font-semibold tracking-tight text-white">Zone 2: Configuration</h2>
         </div>
-        <span className="text-[10px] px-2 py-0.5 rounded-full bg-stone-200 text-espresso-700 font-mono">Step 2 & 3</span>
+        <span className="text-[10px] font-mono text-cyan-400/80 px-2 py-0.5 rounded-full bg-cyan-500/[0.08] border border-cyan-500/20">
+          Step 3 & 4
+        </span>
       </div>
 
-      {/* Main Controls Card */}
-      <div className="p-5 rounded-2xl bg-base-card border border-stone-200/80 shadow-subtle backdrop-blur-glass flex flex-col gap-5">
+      {/* Main Glass Configuration Card */}
+      <div className="p-5 rounded-2xl bg-white/[0.03] backdrop-blur-2xl border border-white/[0.06] shadow-glass-sm flex flex-col gap-5 flex-1 overflow-y-auto">
         {/* Pipeline Route Target */}
         <div className="flex flex-col gap-1.5">
-          <label className="text-[11px] font-semibold uppercase tracking-wider text-espresso-600">
-            Pipeline Route
-          </label>
+          <div className="flex items-center justify-between">
+            <label className="text-[11px] font-mono uppercase tracking-wider text-silver-400">
+              Pipeline Synthesis Route
+            </label>
+            <Cpu className="w-3 h-3 text-cyan-400" />
+          </div>
           <select
             value={route}
             onChange={(e) => onChangeRoute(e.target.value)}
-            className="w-full bg-stone-100/80 border border-stone-300 rounded-xl px-3 py-2 text-xs font-medium text-espresso-900 focus:outline-none focus:border-espresso-800 transition-colors"
+            className="w-full bg-black/60 border border-white/10 rounded-xl px-3 py-2 text-xs font-mono text-white focus:outline-none focus:border-cyan-400 transition-colors"
           >
-            <option value="auto">Auto-Detect via RAG</option>
-            <option value="relational">Relational (1:1, 1:N, N:M)</option>
+            <option value="auto">Auto-Detect via RAG (Dynamic)</option>
+            <option value="relational">Relational Graph (1:1, 1:N, N:M)</option>
             <option value="tabular">Tabular (Single Entity)</option>
-            <option value="document">Document (Invoices / Ledgers)</option>
+            <option value="document">Document (Invoices / Statements)</option>
           </select>
         </div>
 
-        {/* Row Count Slider */}
+        {/* Razor-Thin Slider 1: Row Count */}
         <div className="flex flex-col gap-2">
           <div className="flex items-center justify-between">
-            <label className="text-[11px] font-semibold uppercase tracking-wider text-espresso-600">
-              Total Row Count
+            <label className="text-[11px] font-mono uppercase tracking-wider text-silver-400">
+              Synthetic Row Count
             </label>
-            <span className="text-xs font-mono font-bold text-espresso-900 bg-stone-200/80 px-2 py-0.5 rounded">
-              {config.row_count}
+            <span className="text-xs font-mono font-semibold text-cyan-300 bg-cyan-500/10 border border-cyan-500/20 px-2 py-0.5 rounded">
+              {config.row_count} records
             </span>
           </div>
           <input
@@ -89,81 +100,113 @@ export const RightSidebar: React.FC<RightSidebarProps> = ({
             max="150"
             value={config.row_count}
             onChange={(e) => updateConfig("row_count", parseInt(e.target.value))}
-            className="w-full h-1.5 bg-stone-200 rounded-lg appearance-none cursor-pointer accent-espresso-900"
+            className="w-full razor-slider"
           />
+          <div className="flex justify-between text-[10px] font-mono text-silver-600 px-0.5">
+            <span>5</span>
+            <span>75</span>
+            <span>150</span>
+          </div>
         </div>
 
-        {/* Edge-Case Injection Slider */}
+        {/* Razor-Thin Slider 2: Edge-Case Injection Rate */}
         <div className="flex flex-col gap-2">
           <div className="flex items-center justify-between">
-            <label className="text-[11px] font-semibold uppercase tracking-wider text-espresso-600">
-              Edge-Case Rate
+            <label className="text-[11px] font-mono uppercase tracking-wider text-silver-400">
+              Edge-Case Injection Rate
             </label>
-            <span className="text-xs font-mono font-bold text-espresso-900 bg-stone-200/80 px-2 py-0.5 rounded">
+            <span className="text-xs font-mono font-semibold text-amber-300 bg-amber-500/10 border border-amber-500/20 px-2 py-0.5 rounded">
               {Math.round(config.edge_case_rate * 100)}%
             </span>
           </div>
           <input
             type="range"
             min="0"
-            max="30"
+            max="40"
             value={Math.round(config.edge_case_rate * 100)}
             onChange={(e) => updateConfig("edge_case_rate", parseInt(e.target.value) / 100)}
-            className="w-full h-1.5 bg-stone-200 rounded-lg appearance-none cursor-pointer accent-espresso-900"
+            className="w-full razor-slider"
           />
-          <p className="text-[10px] text-espresso-500">Injects nulls, outliers & format anomalies for robust QA</p>
+          <p className="text-[10px] text-silver-500 leading-relaxed font-sans">
+            Injects nulls, boundary outliers, and format anomalies for adversarial QA validation.
+          </p>
         </div>
 
-        <div className="h-px bg-stone-200 my-1" />
+        <div className="h-px bg-white/[0.06] my-0.5" />
 
-        {/* Privacy Controls Toggles */}
+        {/* Thin-Line Toggle Switches: Privacy Controls */}
         <div className="flex flex-col gap-2.5">
-          <div className="flex items-center gap-1.5">
-            <ShieldCheck className="w-3.5 h-3.5 text-espresso-700" />
-            <label className="text-[11px] font-semibold uppercase tracking-wider text-espresso-600">
-              Privacy Controls
-            </label>
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-1.5">
+              <ShieldCheck className="w-3.5 h-3.5 text-cyan-400" strokeWidth={1.5} />
+              <label className="text-[11px] font-mono uppercase tracking-wider text-silver-400">
+                Privacy Controls
+              </label>
+            </div>
+            <Lock className="w-3 h-3 text-silver-600" />
           </div>
 
           <div className="space-y-2">
             {[
-              { id: "mask", label: "Column-Level Masking", desc: "e****l@company.com", active: hasMasking },
-              { id: "differential_noise", label: "Differential Noise (ε=0.3)", desc: "Laplacian noise on numeric fields", active: hasDifferentialNoise },
-              { id: "hash", label: "SHA-256 Hashing", desc: "Salted cryptographic hex tokens", active: hasHashing },
+              {
+                id: "mask",
+                label: "Column-Level Masking",
+                desc: "e****l@synthcorp.io",
+                active: hasMasking,
+              },
+              {
+                id: "hash",
+                label: "SHA-256 Hashing",
+                desc: "Cryptographic tokenized IDs",
+                active: hasHashing,
+              },
+              {
+                id: "differential_noise",
+                label: "Differential Noise (ε=0.3)",
+                desc: "Laplacian perturbation on metrics",
+                active: hasDifferentialNoise,
+              },
             ].map((p) => (
               <button
                 key={p.id}
                 type="button"
                 onClick={() => togglePrivacy(p.id as any)}
-                className={`w-full flex items-center justify-between p-2.5 rounded-xl border text-left transition-all ${
+                className={`w-full flex items-center justify-between p-2.5 rounded-xl border text-left transition-all duration-200 ${
                   p.active
-                    ? "bg-espresso-50 border-espresso-400 text-espresso-950"
-                    : "bg-stone-100/50 border-stone-200 text-espresso-700 hover:bg-stone-200/40"
+                    ? "bg-cyan-500/[0.08] border-cyan-500/40 text-white shadow-[0_0_15px_rgba(6,182,212,0.12)]"
+                    : "bg-white/[0.02] border-white/[0.06] text-silver-400 hover:bg-white/[0.04] hover:text-silver-300"
                 }`}
               >
                 <div>
-                  <div className="text-xs font-medium">{p.label}</div>
-                  <div className="text-[10px] text-espresso-500">{p.desc}</div>
+                  <div className="text-xs font-medium text-white">{p.label}</div>
+                  <div className="text-[10px] text-silver-500 font-mono mt-0.5">{p.desc}</div>
                 </div>
+
+                {/* Thin-line Minimalist Toggle Switch */}
                 <div
-                  className={`w-4 h-4 rounded-full border flex items-center justify-center transition-colors ${
-                    p.active ? "bg-espresso-900 border-espresso-900 text-white" : "border-stone-400 bg-white"
+                  className={`w-8 h-4 rounded-full p-0.5 transition-colors duration-200 flex items-center ${
+                    p.active ? "bg-cyan-400 justify-end shadow-[0_0_8px_#06b6d4]" : "bg-white/10 justify-start"
                   }`}
                 >
-                  {p.active && <div className="w-1.5 h-1.5 rounded-full bg-white" />}
+                  <motion.div
+                    layout
+                    className={`w-3 h-3 rounded-full transition-colors ${
+                      p.active ? "bg-black" : "bg-silver-500"
+                    }`}
+                  />
                 </div>
               </button>
             ))}
           </div>
         </div>
 
-        <div className="h-px bg-stone-200 my-1" />
+        <div className="h-px bg-white/[0.06] my-0.5" />
 
         {/* Locale Settings */}
         <div className="flex flex-col gap-1.5">
           <div className="flex items-center gap-1.5">
-            <Globe className="w-3.5 h-3.5 text-espresso-700" />
-            <label className="text-[11px] font-semibold uppercase tracking-wider text-espresso-600">
+            <Globe className="w-3.5 h-3.5 text-cyan-400" strokeWidth={1.5} />
+            <label className="text-[11px] font-mono uppercase tracking-wider text-silver-400">
               Locale & Tax Rules
             </label>
           </div>
@@ -178,36 +221,37 @@ export const RightSidebar: React.FC<RightSidebarProps> = ({
                 tax_rate: parseFloat(tax),
               });
             }}
-            className="w-full bg-stone-100/80 border border-stone-300 rounded-xl px-3 py-2 text-xs font-medium text-espresso-900 focus:outline-none focus:border-espresso-800 transition-colors"
+            className="w-full bg-black/60 border border-white/10 rounded-xl px-3 py-2 text-xs font-mono text-white focus:outline-none focus:border-cyan-400 transition-colors"
           >
-            <option value="USD|$|0.0825">USD ($) - US Sales Tax 8.25%</option>
-            <option value="EUR|€|0.19">EUR (€) - EU Standard VAT 19.0%</option>
-            <option value="GBP|£|0.20">GBP (£) - UK Standard VAT 20.0%</option>
-            <option value="CAD|C$|0.13">CAD (C$) - Ontario HST 13.0%</option>
+            <option value="USD|$|0.0825">USD ($) — US Sales Tax (8.25%)</option>
+            <option value="EUR|€|0.19">EUR (€) — EU Standard VAT (19.0%)</option>
+            <option value="GBP|£|0.20">GBP (£) — UK Standard VAT (20.0%)</option>
+            <option value="CAD|C$|0.13">CAD (C$) — Ontario HST (13.0%)</option>
           </select>
         </div>
       </div>
 
-      {/* Prominent Heavy Espresso Brown Action CTA */}
-      <Magnetic strength={0.25} className="w-full">
+      {/* Action Button: Borderless, Intensely Glowing "Generate Data" Button */}
+      <Magnetic strength={0.3} className="w-full">
         <button
           onClick={onGenerate}
           disabled={isLoading}
-          className="w-full py-4 px-6 rounded-2xl bg-espresso-900 hover:bg-espresso-950 active:scale-[0.98] text-base-card font-serif text-sm font-bold tracking-wide shadow-card hover:shadow-magnetic transition-all flex items-center justify-center gap-2.5 disabled:opacity-75 disabled:pointer-events-none"
+          className="w-full py-4 px-6 rounded-2xl border-none bg-cyan-400 hover:bg-cyan-300 text-black font-semibold text-sm tracking-wide shadow-[0_0_35px_rgba(6,182,212,0.65)] hover:shadow-[0_0_55px_rgba(6,182,212,0.9)] active:scale-[0.98] transition-all duration-300 flex items-center justify-center gap-2.5 disabled:opacity-75 disabled:pointer-events-none group"
         >
           {isLoading ? (
             <>
-              <Loader2 className="w-4 h-4 animate-spin text-stone-200" />
-              <span>Synthesizing Data...</span>
+              <Loader2 className="w-4 h-4 animate-spin text-black" />
+              <span className="font-mono text-xs tracking-wider uppercase">Synthesizing Data...</span>
             </>
           ) : (
             <>
-              <Play className="w-4 h-4 fill-stone-200 text-stone-200" />
-              <span>Generate Data</span>
+              <Play className="w-4 h-4 fill-black text-black group-hover:scale-110 transition-transform" />
+              <span className="tracking-wide uppercase font-mono text-xs font-bold">Generate Data</span>
+              <Sparkles className="w-3.5 h-3.5 text-black opacity-80" />
             </>
           )}
         </button>
       </Magnetic>
-    </aside>
+    </motion.aside>
   );
 };

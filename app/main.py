@@ -43,7 +43,7 @@ async def serve_index():
 async def health_check():
     return {
         "status": "healthy",
-        "engine": "HackDataV2-Gemini-Core",
+        "engine": "Versatile-Gemini-Core",
         "version": settings.VERSION,
         "environment": settings.ENVIRONMENT,
         "gemini_integration": "active" if bool(settings.GEMINI_API_KEY) else "ready (fallback/local engine active)"

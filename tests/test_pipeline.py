@@ -7,7 +7,7 @@ from app.services.relational_engine import RelationalEngine
 from app.services.document_engine import DocumentEngine
 from app.services.pipeline import PipelineCoordinator
 
-class TestHackDataV2Pipeline(unittest.TestCase):
+class TestVersatilePipeline(unittest.TestCase):
 
     def test_step1_rag_routing_inference(self):
         """Verify Step 1 type inference and relational detection."""

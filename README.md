@@ -1,4 +1,4 @@
-# HackDataV2 | Enterprise Synthetic Data Platform
+# Versatile | Enterprise Synthetic Data Platform
 
 High-performance AI Synthetic Data Generation Platform powered by **FastAPI**, **Gemini LLM Core Engine**, **Pandas**, **NumPy**, and **Supabase / PostgreSQL**.
 
@@ -93,4 +93,4 @@ Deploy the SQL schema in `app/db/schema.sql` to your Supabase / PostgreSQL insta
 ---
 
 ## 📜 License
-MIT License &bull; HackDataV2 Synthetic Data Platform.
+MIT License &bull; Versatile Synthetic Data Platform.

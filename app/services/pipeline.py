@@ -8,7 +8,7 @@ from app.services.document_engine import DocumentEngine
 
 class PipelineCoordinator:
     """
-    Executes the 5-step HackDataV2 Synthetic Data Pipeline:
+    Executes the 5-step Versatile Synthetic Data Pipeline:
     Step 1: Ingestion & RAG Routing
     Step 2: Configuration & Constraint Mapping
     Step 3: Content Synthesis & Edge-Case Injection
@@ -135,7 +135,7 @@ class PipelineCoordinator:
             validation_status=status_flag,
             metadata={
                 "processing_time_ms": elapsed_ms,
-                "engine_version": "HackDataV2-Gemini-Core",
+                "engine_version": "Versatile-Gemini-Core",
                 "route_selected": route,
                 "record_counts": {k: len(v) if isinstance(v, list) else 1 for k, v in output_data.items()},
                 "edge_case_rate": config.edge_case_rate,

@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 class Settings(BaseModel):
-    PROJECT_NAME: str = "HackDataV2 Synthetic Data Platform"
+    PROJECT_NAME: str = "Versatile Synthetic Data Platform"
     VERSION: str = "2.0.0"
     API_V1_STR: str = "/api/v1"
     

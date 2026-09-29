@@ -3,32 +3,112 @@
 @tailwind utilities;
 
 :root {
-  --bg-base: #F5F5F0;
-  --surface-card: #FCFCFA;
-  --espresso: #3E2723;
-  --muted-brown: #8D6E63;
-  --border-soft: #E6E2DE;
+  --bg-obsidian: #000000;
+  --text-primary: #FFFFFF;
+  --text-secondary: #A1A1AA;
+  --accent-cyan: #06b6d4;
+  --accent-cyan-glow: rgba(6, 182, 212, 0.4);
 }
 
+* {
+  box-sizing: border-box;
+}
+
+html,
 body {
-  background-color: var(--bg-base);
-  color: var(--espresso);
+  background-color: #000000;
+  color: #FFFFFF;
   overflow-x: hidden;
-  cursor: default;
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Custom scrollbar in warm organic beige/brown */
+::selection {
+  background: rgba(6, 182, 212, 0.3);
+  color: #ffffff;
+}
+
+/* Custom sleek scrollbar for obsidian glass */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 5px;
+  height: 5px;
 }
 ::-webkit-scrollbar-track {
-  background: rgba(245, 245, 240, 0.6);
+  background: rgba(0, 0, 0, 0.2);
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(141, 110, 99, 0.4);
+  background: rgba(255, 255, 255, 0.12);
   border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(62, 39, 35, 0.6);
+  background: rgba(6, 182, 212, 0.5);
+}
+
+/* Razor-thin Range Sliders with Glowing Thumbs */
+input[type="range"].razor-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  cursor: pointer;
+  height: 16px;
+}
+
+input[type="range"].razor-slider::-webkit-slider-runnable-track {
+  height: 2px;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 9999px;
+  transition: background 0.2s ease;
+}
+
+input[type="range"].razor-slider:hover::-webkit-slider-runnable-track {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+input[type="range"].razor-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  margin-top: -6px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #22d3ee;
+  box-shadow: 0 0 12px #06b6d4, 0 0 20px rgba(6, 182, 212, 0.5);
+  border: 2px solid #ffffff;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+input[type="range"].razor-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+  box-shadow: 0 0 18px #06b6d4, 0 0 30px rgba(6, 182, 212, 0.8);
+}
+
+input[type="range"].razor-slider::-moz-range-track {
+  height: 2px;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 9999px;
+}
+
+input[type="range"].razor-slider::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #22d3ee;
+  box-shadow: 0 0 12px #06b6d4;
+  border: 2px solid #ffffff;
+}
+
+/* Glassmorphism Surface Utility */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.glass-panel-subtle {
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.04);
 }

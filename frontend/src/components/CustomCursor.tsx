@@ -11,11 +11,14 @@ export const CustomCursor: React.FC = () => {
   const mouseY = useMotionValue(-100);
 
   // Smooth fluid spring physics for trailing effect
-  const springConfig = { damping: 26, stiffness: 240, mass: 0.5 };
+  const springConfig = { damping: 28, stiffness: 300, mass: 0.4 };
   const cursorX = useSpring(mouseX, springConfig);
   const cursorY = useSpring(mouseY, springConfig);
 
   useEffect(() => {
+    // Only enable custom cursor on devices with mouse/pointer
+    if (window.matchMedia("(pointer: coarse)").matches) return;
+
     const handleMouseMove = (e: MouseEvent) => {
       mouseX.set(e.clientX);
       mouseY.set(e.clientY);
@@ -29,6 +32,7 @@ export const CustomCursor: React.FC = () => {
         target?.closest("input") ||
         target?.closest("select") ||
         target?.closest("a") ||
+        target?.closest("label") ||
         target?.closest(".interactive-target")
       ) {
         setIsHovered(true);
@@ -54,22 +58,23 @@ export const CustomCursor: React.FC = () => {
 
   return (
     <div className="pointer-events-none fixed inset-0 z-50 overflow-hidden">
-      {/* Trailing Fluid Spring Disc */}
+      {/* Trailing Fluid Spring Disc with luminous cyan aura */}
       <motion.div
-        className="fixed top-0 left-0 rounded-full border border-espresso-700/30 bg-espresso-900/15 backdrop-blur-[1px]"
+        className="fixed top-0 left-0 rounded-full border border-cyan-400/40 bg-cyan-500/[0.04] backdrop-blur-[0.5px]"
         style={{
           x: cursorX,
           y: cursorY,
           translateX: "-50%",
           translateY: "-50%",
-          width: isHovered ? 52 : 32,
-          height: isHovered ? 52 : 32,
+          width: isHovered ? 48 : 28,
+          height: isHovered ? 48 : 28,
+          boxShadow: isHovered ? "0 0 20px rgba(6,182,212,0.4)" : "0 0 10px rgba(6,182,212,0.2)",
         }}
-        transition={{ type: "spring", stiffness: 350, damping: 25 }}
+        transition={{ type: "spring", stiffness: 380, damping: 28 }}
       />
-      {/* Precise Center Dot */}
+      {/* Precise Center Luminous Dot */}
       <motion.div
-        className="fixed top-0 left-0 w-2 h-2 rounded-full bg-espresso-900"
+        className="fixed top-0 left-0 w-1.5 h-1.5 rounded-full bg-cyan-300 shadow-[0_0_8px_#06b6d4]"
         style={{
           x: mouseX,
           y: mouseY,
